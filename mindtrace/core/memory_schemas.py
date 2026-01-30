@@ -23,7 +23,7 @@ class UserProfile(BaseModel):
         None, description="User-identified gender"
     )
     timezone: str = "UTC"
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=datetime.now())
 
 
 # =================================================
@@ -38,7 +38,7 @@ class EpisodicMemory(BaseModel):
 
     entry_id: UUID = Field(default_factory=uuid4)
     user_id: UUID
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=datetime.now())
 
     text: str
     user_tags: Optional[List[str]] = []
