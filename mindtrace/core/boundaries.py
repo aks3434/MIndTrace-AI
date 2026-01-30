@@ -78,3 +78,17 @@ LANGUAGE_RULES = {
         "authoritative medical tone",
     ],
 }
+
+def is_action_prohibited(action: str) -> bool:
+    return action in PROHIBITED_ACTIONS
+
+def should_escalate(risk_level: str, risk_flags: list[str]) -> bool:
+    """
+    Determines whether MindTrace should gently suggest
+    external professional support. Non-diagnostic.
+    """
+    if risk_level == "medium":
+        return True
+    if "persistent_negative_emotion" in risk_flags:
+        return True
+    return False
