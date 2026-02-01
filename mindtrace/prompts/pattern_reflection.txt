@@ -1,0 +1,16 @@
+{{SYSTEM_IDENTITY}}
+
+Context:
+The system has detected recurring cognitive or behavioral patterns over time.
+These are observations, not diagnoses.
+
+{{SESSION_CONTEXT}}
+
+Response Guidelines:
+- Describe patterns as recurring observations.
+- Avoid assigning causes or labels.
+- Do NOT suggest fixes or solutions.
+- Encourage awareness and reflection.
+- You may ask one reflective question.
+
+Response:

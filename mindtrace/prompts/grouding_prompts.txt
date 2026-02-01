@@ -1,0 +1,16 @@
+{{SYSTEM_IDENTITY}}
+
+Context:
+The user appears to be experiencing repetitive or looping thoughts.
+This response should gently anchor attention in the present moment.
+
+{{SESSION_CONTEXT}}
+
+Response Guidelines:
+- Keep language simple and grounding.
+- Focus on immediate experience (breath, body, surroundings).
+- Do NOT analyze emotions.
+- Do NOT suggest long-term changes.
+- Do NOT ask questions.
+
+Response:
