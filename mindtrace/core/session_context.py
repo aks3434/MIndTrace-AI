@@ -1,4 +1,4 @@
-from datetime import datetime , UTC
+from datetime import datetime, UTC
 from typing import List, Dict, Any
 
 from mindtrace.core.boundaries import SYSTEM_IDENTITY
@@ -7,6 +7,8 @@ from mindtrace.core.memory_schemas import (
     BehavioralMemory,
     CognitivePattern,
 )
+from mindtrace.core.patterns import evaluate_patterns
+from mindtrace.core.pattern_persistence import persist_cognitive_patterns
 
 
 class SessionContext:
@@ -27,6 +29,39 @@ class SessionContext:
         self.recent_behavior = recent_behavior
         self.active_patterns = active_patterns
         self.generated_at = datetime.now(UTC)
+
+    # -------------------------------------------------
+    # Factory Constructor (NEW)
+    # -------------------------------------------------
+
+    @classmethod
+    def from_new_session(
+        cls,
+        user_id,
+        recent_episodes: List[EpisodicMemory],
+        behavioral_history: List[BehavioralMemory],
+        current_behavioral: BehavioralMemory,
+        existing_patterns: List[CognitivePattern],
+    ):
+        """
+        Creates a SessionContext after processing a new session.
+        """
+        pattern_result = evaluate_patterns(
+            session_history=behavioral_history,
+            current_session=current_behavioral,
+        )
+
+        updated_patterns = persist_cognitive_patterns(
+            user_id=user_id,
+            pattern_result=pattern_result,
+            existing_patterns=existing_patterns,
+        )
+
+        return cls(
+            recent_episodes=recent_episodes,
+            recent_behavior=behavioral_history + [current_behavioral],
+            active_patterns=updated_patterns,
+        )
 
     # -------------------------------------------------
     # Public Interface
@@ -123,3 +158,5 @@ class SessionContext:
             flags.append("late_night_vulnerability")
 
         return flags
+    
+    
